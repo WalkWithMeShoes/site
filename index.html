@@ -124,6 +124,18 @@ nav ul li a:hover {
         .cart-count:hover {
             transform: scale(1.1);
         }
+        /* Botón de menú móvil */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.menu-toggle:hover {
+    color: #2A9D8F;
+}
         
         /* Banner */
         .banner {
@@ -1057,54 +1069,181 @@ nav ul li a:hover {
         }
         
         /* Responsive */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-            }
-            
-            nav ul {
-                margin-top: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 0 10px 10px;
-            }
-            
-            .header-icons {
-                margin-top: 20px;
-            }
-            
-            .banner {
-                height: 400px;
-            }
-            
-            .banner-content h1 {
-                font-size: 32px;
-            }
-            
-            .newsletter-form {
-                flex-direction: column;
-            }
-            
-            .newsletter-form input {
-                border-radius: 30px;
-                margin-bottom: 15px;
-            }
-            
-            .newsletter-form button {
-                border-radius: 30px;
-            }
-            
-            .footer-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .product-detail {
-                flex-direction: column;
-            }
-        }
+@media (max-width: 768px) {
+    /* Header más compacto */
+    .header-container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 20px;
+        position: relative;
+    }
+    
+    .logo-img {
+        height: 50px;
+    }
+    
+    /* Menú hamburguesa */
+    .menu-toggle {
+        display: block;
+        font-size: 24px;
+        cursor: pointer;
+        order: 3;
+        margin-left: 15px;
+        z-index: 101;
+    }
+    
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        z-index: 100;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        display: none;
+    }
+    
+    nav.active {
+        display: block;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        margin: 0;
+        padding: 15px;
+    }
+    
+    nav ul li {
+        margin: 10px 0;
+        width: 100%;
+    }
+    
+    nav ul li a {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .header-icons {
+        margin-top: 0;
+        order: 2;
+    }
+    
+    /* Banner adaptado */
+    .banner {
+        height: 350px;
+        background-position: center;
+    }
+    
+    .banner-content h1 {
+        font-size: 32px;
+    }
+    
+    .banner-content p {
+        font-size: 16px;
+        padding: 0 15px;
+    }
+    
+    /* Marcas */
+    .brands-container {
+        gap: 10px;
+    }
+    
+    .brand {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Productos */
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .product-image {
+        height: 140px;
+    }
+    
+    .product-title {
+        font-size: 14px;
+        height: 36px;
+    }
+    
+    .price {
+        font-size: 16px;
+    }
+    
+    .add-to-cart {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+    
+    /* Newsletter */
+    .newsletter-form {
+        flex-direction: column;
+        width: 90%;
+    }
+    
+    .newsletter-form input {
+        border-radius: 30px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    
+    .newsletter-form button {
+        border-radius: 30px;
+        width: 100%;
+    }
+    
+    /* Footer */
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 20px;
+    }
+    
+    /* Modal de producto */
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+        margin: 10% auto;
+    }
+    
+    .product-detail {
+        flex-direction: column;
+    }
+    
+    /* Carrito lateral */
+    .cart-sidebar {
+        width: 100%;
+        max-width: 100%;
+        right: -100%;
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .section-title h2 {
+        font-size: 24px;
+    }
+    
+    .banner-content h1 {
+        font-size: 24px;
+    }
+    
+    .size-table {
+        font-size: 12px;
+    }
+    
+    .size-table th, .size-table td {
+        padding: 8px 5px;
+    }
+    
+    .product-card {
+        margin-bottom: 10px;
+    }
+}
         
         /* Brand Display */
         .brand-products {
@@ -1166,6 +1305,7 @@ nav ul li a:hover {
             <a href="#home" class="logo">
     <img src="images/Logo head.png" alt="Logo de Walk With Me" class="logo-img">
 </a>
+<div class="menu-toggle" id="menu-toggle">☰</div>
             <nav>
                 <ul>
                     <li><a href="#home">Inicio</a></li>
@@ -1861,6 +2001,22 @@ nav ul li a:hover {
             // Toast notification
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toast-message');
+            // Menú móvil
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.querySelector('nav');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+    
+    // Cerrar menú al hacer clic en enlaces
+    document.querySelectorAll('nav ul li a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
             
             // Cart elements
             const cartIcon = document.getElementById('cart-icon');
@@ -2317,6 +2473,20 @@ nav ul li a:hover {
                             behavior: 'smooth'
                         });
                     }
+                    // Manejo de errores de imágenes
+    document.querySelectorAll('img').forEach(img => {
+        img.onerror = function() {
+            this.onerror = null;
+            this.src = 'https://via.placeholder.com/300?text=Imagen+no+disponible';
+            console.log('Error cargando imagen: ' + this.alt);
+        };
+    });
+    
+    // Verificar rutas de imágenes
+    console.log("Verificando imágenes...");
+    document.querySelectorAll('img').forEach(img => {
+        console.log(`Imagen ${img.alt}: ${img.src}`);
+    });
                 });
             });
         });

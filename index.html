@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walk with me - Tu tienda de zapatos</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        html {
+           scroll-behavior: smooth;
+           scroll-padding-top: 100px; /* Altura de tu header sticky */
+        }
+
+        section {
+            min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+            padding-top: 120px;
+            padding-bottom: 60px;
+            box-sizing: border-box;
+        }
+
+        
+        /* Header */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        } 
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }   
+     .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+.logo-img {
+    height: 75px; /* Ajusta la altura según lo necesites */
+    width: auto; /* Mantiene la proporción de la imagen */
+}
+        
+        .logo span {
+            color: #333;
+        }
+        
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+}
+
+nav ul li {
+    margin-left: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    background-color: #264653;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    background-color: #2A9D8F;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(42, 157, 143, 0.3);
+}
+        
+        .header-icons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-icons a {
+            margin-left: 15px;
+            color: #333;
+            text-decoration: none;
+            position: relative;
+            font-size: 20px;
+            transition: transform 0.2s, color 0.2s;
+        }
+        
+        .header-icons a:hover {
+            color: #2A9D8F;
+            transform: scale(1.1);
+        }
+        
+        .cart-count {
+            background-color: #2A9D8F;
+            color: white;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            transition: transform 0.2s;
+        }
+        
+        .cart-count:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Banner */
+        .banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/400') center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            border-radius: 0 0 10px 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .banner-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .banner-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #2A9D8F;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: #fff;
+            color: #2A9D8F;
+            border-color: #2A9D8F;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Brands */
+        .brands {
+            margin-bottom: 60px;
+            padding: 20px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #2A9D8F;
+            border-radius: 3px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .section-title p {
+            color: #777;
+            font-size: 16px;
+        }
+        
+        .brands-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .brand {
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brand:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(42,157,143,0.1) 0%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .brand:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .brand:hover:before {
+            opacity: 1;
+        }
+        
+        .brand img {
+            max-width: 100%;
+            max-height: 100px;
+            transition: transform 0.3s;
+        }
+        
+        .brand:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Featured Products */
+        .products {
+            margin-bottom: 60px;
+            padding: 20px 0;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(42, 157, 143, 0.85);
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            transition: .5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-card:hover .product-overlay {
+            height: 100%;
+        }
+        
+        .quick-view {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            background: transparent;
+            border: 2px solid white;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        
+        .quick-view:hover {
+            background-color: white;
+            color: #2A9D8F;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-category {
+            color: #2A9D8F;
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+            height: 44px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .price {
+            font-weight: 700;
+            font-size: 20px;
+            color: #2A9D8F;
+        }
+        
+        .add-to-cart {
+            background-color: #2A9D8F;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .add-to-cart:hover {
+            background-color: white;
+            color: #2A9D8F;
+            border-color: #2A9D8F;
+        }
+        
+        /* Size Guide */
+        .size-guide {
+            background-color: white;
+            padding: 50px 0;
+            margin-bottom: 60px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .size-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .size-table th, .size-table td {
+            border: 1px solid #eee;
+            padding: 15px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        
+        .size-table th {
+            background-color: #2A9D8F;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .size-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .size-table tr:hover td {
+            background-color: #edf6f9;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(45deg, #2A9D8F, #38A89D);
+            padding: 70px 0;
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1200/400') center/cover;
+            opacity: 0.1;
+        }
+        
+        .newsletter h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .newsletter p {
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            font-size: 16px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .newsletter-form button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 70px 0 20px;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+        }
+        
+        .footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+}
+
+        
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+            color: #fff;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #2A9D8F;
+            border-radius: 3px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #2A9D8F;
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 25px;
+            gap: 10px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        
+        .social-links a:hover {
+            background-color: #2A9D8F;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .modal.active {
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1000px;
+            animation: modalopen 0.5s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-50px);
+            opacity: 0;
+            transition: all 0.5s;
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        @keyframes modalopen {
+            from {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #2A9D8F;
+        }
+        
+        .product-detail {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .product-detail-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .product-detail-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-detail-image img:hover {
+            transform: scale(1.02);
+        }
+        
+        .product-detail-info {
+            flex: 1;
+            padding: 20px;
+            min-width: 300px;
+        }
+        
+        .product-detail-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .product-detail-price {
+            font-size: 28px;
+            color: #2A9D8F;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .product-detail-description {
+            margin-bottom: 25px;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .size-selection {
+            margin-bottom: 25px;
+        }
+        
+        .size-selection h4 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .size-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .size-option {
+            width: 45px;
+            height: 45px;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .size-option:hover {
+            background-color: #edf6f9;
+            border-color: #2A9D8F;
+        }
+        
+        .size-option.active {
+            background-color: #2A9D8F;
+            color: white;
+            border-color: #2A9D8F;
+        }
+        
+        .quantity-selection {
+            margin-bottom: 25px;
+        }
+        
+        .quantity-selection h4 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .quantity-input {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-btn {
+            width: 45px;
+            height: 45px;
+            background-color: #f5f5f5;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 5px;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #eee;
+        }
+        
+        .quantity {
+            width: 60px;
+            height: 45px;
+            text-align: center;
+            border: 1px solid #ddd;
+            margin: 0 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        
+        .add-to-cart-detail {
+            background-color: #2A9D8F;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+        
+        .add-to-cart-detail:hover {
+            background-color: white;
+            color: #2A9D8F;
+            border-color: #2A9D8F;
+            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.2);
+        }
+        
+        .product-detail-category {
+            color: #777;
+        }
+        
+        .product-detail-category span {
+            color: #2A9D8F;
+            font-weight: 600;
+        }
+        
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: right 0.3s;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .cart-header h3 {
+            font-size: 22px;
+            color: #333;
+        }
+        
+        .close-cart {
+            cursor: pointer;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+        
+        .close-cart:hover {
+            color: #2A9D8F;
+        }
+        
+        .cart-items {
+            margin-bottom: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            transition: transform 0.3s;
+        }
+        
+        .cart-item:hover {
+            transform: translateX(-5px);
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+        }
+        
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .cart-item:hover .cart-item-image img {
+            transform: scale(1.05);
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .cart-item-price {
+            color: #2A9D8F;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .cart-item-size {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+        
+        .cart-item-quantity button {
+            width: 25px;
+            height: 25px;
+            background-color: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 4px;
+        }
+        
+        .cart-item-quantity button:hover {
+            background-color: #eee;
+        }
+        
+        .cart-item-quantity span {
+            margin: 0 10px;
+            font-weight: 600;
+        }
+        
+        .remove-item {
+            color: #2A9D8F;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 5px;
+            transition: all 0.3s;
+            text-decoration: underline;
+            padding: 0;
+        }
+        
+        .remove-item:hover {
+            color: #264653;
+            transform: translateX(3px);
+        }
+        
+        .cart-summary {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .cart-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+        
+        .cart-total {
+            font-weight: 700;
+            font-size: 20px;
+            color: #333;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            margin-top: 10px;
+        }
+        
+        .cart-total span:last-child {
+            color: #2A9D8F;
+        }
+        
+        .checkout-btn {
+            background-color: #2A9D8F;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+        
+        .checkout-btn:hover {
+            background-color: white;
+            color: #2A9D8F;
+            border-color: #2A9D8F;
+            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.2);
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .toast.success {
+            background-color: #4CAF50;
+        }
+        
+        .toast.error {
+            background-color: #f44336;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px 10px;
+            }
+            
+            .header-icons {
+                margin-top: 20px;
+            }
+            
+            .banner {
+                height: 400px;
+            }
+            
+            .banner-content h1 {
+                font-size: 32px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 30px;
+                margin-bottom: 15px;
+            }
+            
+            .newsletter-form button {
+                border-radius: 30px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-detail {
+                flex-direction: column;
+            }
+        }
+        
+        /* Brand Display */
+        .brand-products {
+            display: none;
+        }
+        
+        .brand-products.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #2A9D8F;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 99;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #264653;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toast-message"></span>
+    </div>
+
+    <!-- Back to top button -->
+    <div id="back-to-top" class="back-to-top">↑</div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#home" class="logo">
+    <img src="images/Logo head.png" alt="Logo de Walk With Me" class="logo-img">
+</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#brands">Marcas</a></li>
+                    <li><a href="#products">Productos</a></li>
+                    <li><a href="#size-guide">Guía de Tallas</a></li>
+                    <li><a href="#newsletter">Suscríbete</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="#" id="cart-icon">🛒 <span class="cart-count">0</span></a>
+                <a href="#" id="user-icon">👤</a>
+            </div>
+        </div>
+    </header>
+
+   <!-- Banner -->
+    <section class="banner" id="home" style="background-image: url('images/ezgif-61ec6e45390daf\ \(1\).gif'); background-size: cover; background-position: center;">
+        <div class="banner-content">
+            <h1>Estilo y Comodidad en Cada Paso</h1>
+            <p>Descubre nuestra colección de zapatos de alta calidad para todas las ocasiones.</p>
+            <a href="#products" class="btn">Ver Productos</a>
+        </div>
+    </section>
+
+    <!-- Brands -->
+    <section class="brands" id="brands">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestras Marcas</h2>
+                <p>Trabajamos con las mejores marcas del mercado</p>
+            </div>
+            <div class="brands-container">
+                <div class="brand" data-brand="nike">
+                    <img src="images/NIKE LOGO.png " alt="Nike">
+                </div>
+                <div class="brand" data-brand="adidas">
+                    <img src="images/ADIDAS LOGO.png" alt="Adidas">
+                </div>
+                <div class="brand" data-brand="puma">
+                    <img src="images/PUMA LOGO.png" alt="Puma">
+                </div>
+                <div class="brand" data-brand="converse">
+                    <img src="images/CONVERSE LOGO.png" alt="Converse">
+                </div>
+                <div class="brand" data-brand="reebok">
+                    <img src="images/REEBOK LOGO.png" alt="Reebok">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Productos Destacados</h2>
+                <p>Nuestra selección de zapatos más populares</p>
+            </div>
+
+            <!-- Default Products Display -->
+            <div class="products-grid" id="all-products">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Nike Air Max 2023.png" alt="Nike Air Max">
+                        <div class="product-overlay">
+                            <button class="quick-view" data-product="1">Vista Rápida</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Nike</div>
+                        <h3 class="product-title">Nike Air Max 2023</h3>
+                        <div class="product-price">
+                            <span class="price">Q1,299.00</span>
+                            <button class="add-to-cart" data-product="1">Añadir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Adidas Superstar Classics.png" alt="Adidas Superstar">
+                        <div class="product-overlay">
+                            <button class="quick-view" data-product="2">Vista Rápida</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Adidas</div>
+                        <h3 class="product-title">Adidas Superstar Classics</h3>
+                        <div class="product-price">
+                            <span class="price">Q999.00</span>
+                            <button class="add-to-cart" data-product="2">Añadir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Puma RS-X Reinvention.png" alt="Puma RS-X">
+                        <div class="product-overlay">
+                            <button class="quick-view" data-product="3">Vista Rápida</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Puma</div>
+                        <h3 class="product-title">Puma RS-X Reinvention</h3>
+                        <div class="product-price">
+                            <span class="price">Q1,150.00</span>
+                            <button class="add-to-cart" data-product="3">Añadir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Converse All Star.png" alt="Converse Chuck Taylor">
+                        <div class="product-overlay">
+                            <button class="quick-view" data-product="4">Vista Rápida</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Converse</div>
+                        <h3 class="product-title">Converse Chuck Taylor All Star</h3>
+                        <div class="product-price">
+                            <span class="price">Q799.00</span>
+                            <button class="add-to-cart" data-product="4">Añadir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Reebok Classic Leather.png" alt="Reebok Classic">
+                        <div class="product-overlay">
+                            <button class="quick-view" data-product="5">Vista Rápida</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Reebok</div>
+                        <h3 class="product-title">Reebok Classic Leather</h3>
+                        <div class="product-price">
+                            <span class="price">Q899.00</span>
+                            <button class="add-to-cart" data-product="5">Añadir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Nike Dunk Low Retro.png" alt="Nike Dunk Low">
+                        <div class="product-overlay">
+                            <button class="quick-view" data-product="6">Vista Rápida</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Nike</div>
+                        <h3 class="product-title">Nike Dunk Low Retro</h3>
+                        <div class="product-price">
+                            <span class="price">Q1,099.00</span>
+                            <button class="add-to-cart" data-product="6">Añadir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand Specific Products -->
+            <div class="brand-products" id="nike-products">
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Nike Air Max 2023.png" alt="Nike Air Max">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="1">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Nike</div>
+                            <h3 class="product-title">Nike Air Max 2023</h3>
+                            <div class="product-price">
+                                <span class="price">Q1,299.00</span>
+                                <button class="add-to-cart" data-product="1">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Nike Dunk Low Retro.png" alt="Nike Dunk Low">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="6">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Nike</div>
+                            <h3 class="product-title">Nike Dunk Low Retro</h3>
+                            <div class="product-price">
+                                <span class="price">Q1,099.00</span>
+                                <button class="add-to-cart" data-product="6">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Nike Air Force 1.png" alt="Nike Air Force 1">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="7">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Nike</div>
+                            <h3 class="product-title">Nike Air Force 1 '07</h3>
+                            <div class="product-price">
+                                <span class="price">Q1,199.00</span>
+                                <button class="add-to-cart" data-product="7">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-products" id="adidas-products">
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Adidas Superstar Classics.png" alt="Adidas Superstar">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="2">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Adidas</div>
+                            <h3 class="product-title">Adidas Superstar Classics</h3>
+                            <div class="product-price">
+                                <span class="price">Q999.00</span>
+                                <button class="add-to-cart" data-product="2">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Adidas Stan Smith.png" alt="Adidas Stan Smith">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="8">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Adidas</div>
+                            <h3 class="product-title">Adidas Stan Smith</h3>
+                            <div class="product-price">
+                                <span class="price">Q950.00</span>
+                                <button class="add-to-cart" data-product="8">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Adidas NMD_R1.png" alt="Adidas NMD">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="9">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Adidas</div>
+                            <h3 class="product-title">Adidas NMD_R1</h3>
+                            <div class="product-price">
+                                <span class="price">Q1,350.00</span>
+                                <button class="add-to-cart" data-product="9">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-products" id="puma-products">
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Puma RS-X Reinvention.png" alt="Puma RS-X">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="3">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Puma</div>
+                            <h3 class="product-title">Puma RS-X Reinvention</h3>
+                            <div class="product-price">
+                                <span class="price">Q1,150.00</span>
+                                <button class="add-to-cart" data-product="3">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Puma Suede Classic.png" alt="Puma Suede">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="10">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Puma</div>
+                            <h3 class="product-title">Puma Suede Classic</h3>
+                            <div class="product-price">
+                                <span class="price">Q850.00</span>
+                                <button class="add-to-cart" data-product="10">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-products" id="converse-products">
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Converse All Star.png" alt="Converse Chuck Taylor">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="4">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Converse</div>
+                            <h3 class="product-title">Converse Chuck Taylor All Star</h3>
+                            <div class="product-price">
+                                <span class="price">Q799.00</span>
+                                <button class="add-to-cart" data-product="4">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Converse One Star.png" alt="Converse One Star">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="11">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Converse</div>
+                            <h3 class="product-title">Converse One Star</h3>
+                            <div class="product-price">
+                                <span class="price">Q899.00</span>
+                                <button class="add-to-cart" data-product="11">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-products" id="reebok-products">
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Reebok Classic Leather.png" alt="Reebok Classic">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="5">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Reebok</div>
+                            <h3 class="product-title">Reebok Classic Leather</h3>
+                            <div class="product-price">
+                                <span class="price">Q899.00</span>
+                                <button class="add-to-cart" data-product="5">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Reebok Club C 85.png" alt="Reebok Club C 85">
+                            <div class="product-overlay">
+                                <button class="quick-view" data-product="12">Vista Rápida</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Reebok</div>
+                            <h3 class="product-title">Reebok Club C 85 Vintage</h3>
+                            <div class="product-price">
+                                <span class="price">Q950.00</span>
+                                <button class="add-to-cart" data-product="12">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Size Guide -->
+    <section class="size-guide" id="size-guide">
+        <div class="container">
+            <div class="section-title">
+                <h2>Guía de Tallas</h2>
+                <p>Encuentra la talla perfecta para ti</p>
+            </div>
+            <table class="size-table">
+                <thead>
+                    <tr>
+                        <th>USA</th>
+                        <th>Europa</th>
+                        <th>UK</th>
+                        <th>CM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>6</td>
+                        <td>39</td>
+                        <td>5.5</td>
+                        <td>24</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>40</td>
+                        <td>6.5</td>
+                        <td>25</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>41</td>
+                        <td>7.5</td>
+                        <td>26</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>42</td>
+                        <td>8.5</td>
+                        <td>27</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>43</td>
+                        <td>9.5</td>
+                        <td>28</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>44</td>
+                        <td>10.5</td>
+                        <td>29</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+<section class="newsletter" id="newsletter">
+        <div class="container">
+            <h2>Suscríbete a Nuestro Newsletter</h2>
+            <p>Recibe las últimas novedades y ofertas especiales directamente en tu correo.</p>
+            <form class="newsletter-form" id="newsletter-form">
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <button type="submit">Suscribirse</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Walk with me</h3>
+                    <p>Tu tienda de zapatos favorita con las mejores marcas y precios del mercado.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank" title="Facebook">f</a>
+                        <a href="https://instagram.com" target="_blank" title="Instagram">i</a>
+                        <a href="https://wa.me/50212345678" target="_blank" title="WhatsApp">w</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#home">Inicio</a></li>
+                        <li><a href="#brands">Marcas</a></li>
+                        <li><a href="#products">Productos</a></li>
+                        <li><a href="#size-guide">Guía de Tallas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Atención al Cliente</h3>
+                    <ul>
+                        <li><a href="#" id="faq-link">Preguntas Frecuentes</a></li>
+                        <li><a href="#" id="shipping-link">Envíos y Devoluciones</a></li>
+                        <li><a href="#" id="privacy-link">Política de Privacidad</a></li>
+                        <li><a href="#" id="terms-link">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>📍 Ciudad de Guatemala, Guatemala</li>
+                        <li>📱 <a href="tel:+50212345678">+502 1234-5678</a></li>
+                        <li>✉️ <a href="mailto:info@walkwithme.com">info@walkwithme.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-column" style="text-align: center;">
+    <h3>Formas de Pago</h3>
+    <div style="display: flex; justify-content: center; gap: 15px; align-items: center; flex-wrap: wrap; padding-top: 10px;">
+        <img src="images/VISA.png" alt="Visa" style="height: 70px;">
+        <img src="images/MASTERCARD.png" alt="MasterCard" style="height: 70px;">
+        <img src="images/TRANSFERENCIA BANCARIA.png" alt="Transferencia Bancaria" style="height: 70px;">
+        <img src="images/VISACUOTAS.png" alt="Visacuotas" style="height: 70px;">
+    </div>
+</div>
+            <div class="copyright">
+                &copy; 2025 Walk with me. Todos los derechos reservados. Desarrollado por Grupo 2 - UMG.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="product-detail">
+                <div class="product-detail-image">
+                    <img src="/api/placeholder/500/500" alt="Producto" id="modal-product-image">
+                </div>
+                <div class="product-detail-info">
+                    <h2 class="product-detail-title" id="modal-product-title">Nombre del Producto</h2>
+                    <div class="product-detail-price" id="modal-product-price">Q0.00</div>
+                    <div class="product-detail-description" id="modal-product-description">
+                        Descripción del producto. Este es un calzado de alta calidad diseñado para proporcionar confort y estilo en cada paso.
+                    </div>
+
+                    <div class="size-selection">
+                        <h4>Talla:</h4>
+                        <div class="size-options">
+                            <div class="size-option">6</div>
+                            <div class="size-option">7</div>
+                            <div class="size-option">8</div>
+                            <div class="size-option">9</div>
+                            <div class="size-option">10</div>
+                        </div>
+                    </div>
+
+                    <div class="quantity-selection">
+                        <h4>Cantidad:</h4>
+                        <div class="quantity-input">
+                            <button class="quantity-btn decrease">-</button>
+                            <input type="number" class="quantity" value="1" min="1" max="10">
+                            <button class="quantity-btn increase">+</button>
+                        </div>
+                    </div>
+
+                    <button class="add-to-cart-detail" id="modal-add-to-cart">Añadir al Carrito</button>
+
+                    <div class="product-detail-category" id="modal-product-category">
+                        <strong>Categoría:</strong> <span>Deportivo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-summary">
+            <div class="cart-summary-row">
+                <span>Subtotal:</span>
+                <span id="cart-subtotal">Q0.00</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>Envío:</span>
+                <span>Gratis</span>
+            </div>
+            <div class="cart-summary-row cart-total">
+                <span>Total:</span>
+                <span id="cart-total">Q0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkout-btn">Proceder al Pago</button>
+        </div>
+    </div>
+
+    <script>
+        // Products Data
+        const products = [
+            {
+                id: 1,
+                name: "Nike Air Max 2023",
+                price: 1299.00,
+                category: "Nike",
+                image: "/api/placeholder/300/300",
+                description: "El Nike Air Max 2023 cuenta con amortiguación Air visible que te ofrece una comodidad y un estilo inigualables. Perfecto para el uso diario y para quienes buscan combinar rendimiento con estilo urbano."
+            },
+            {
+                id: 2,
+                name: "Adidas Superstar Classics",
+                price: 999.00,
+                category: "Adidas",
+                image: "/api/placeholder/300/300",
+                description: "El icónico diseño de caparazón con las tres rayas que ha definido el estilo urbano desde 1970. Un clásico atemporal que combina con todo y nunca pasa de moda."
+            },
+            {
+                id: 3,
+                name: "Puma RS-X Reinvention",
+                price: 1150.00,
+                category: "Puma",
+                image: "/api/placeholder/300/300",
+                description: "Una reinvención de la tecnología Running System (RS) de los 80, reinventada para el estilo moderno. Diseño llamativo con combinaciones de colores audaces y una silueta chunky que destaca en cualquier outfit."
+            },
+            {
+                id: 4,
+                name: "Converse Chuck Taylor All Star",
+                price: 799.00,
+                category: "Converse",
+                image: "/api/placeholder/300/300",
+                description: "El clásico Chuck Taylor que ha permanecido fiel a sus raíces desde 1917, un ícono indiscutible de la moda casual. Versátil, cómodo y con un estilo que nunca pasa de moda."
+            },
+            {
+                id: 5,
+                name: "Reebok Classic Leather",
+                price: 899.00,
+                category: "Reebok",
+                image: "/api/placeholder/300/300",
+                description: "Un modelo atemporal con cuero suave y flexible, perfecto para el uso diario con un estilo que nunca pasa de moda. Combina comodidad, durabilidad y un diseño clásico que se adapta a cualquier ocasión."
+            },
+            {
+                id: 6,
+                name: "Nike Dunk Low Retro",
+                price: 1099.00,
+                category: "Nike",
+                image: "/api/placeholder/300/300",
+                description: "Una silueta clásica del baloncesto que se ha convertido en un elemento básico de la cultura street. Con su diseño versátil y combinaciones de colores icónicas, es perfecto para cualquier guardarropa urbano."
+            },
+            {
+                id: 7,
+                name: "Nike Air Force 1 '07",
+                price: 1199.00,
+                category: "Nike",
+                image: "/api/placeholder/300/300",
+                description: "El clásico en blanco que combina con todo. La leyenda vive en el Nike Air Force 1 '07, el ícono del baloncesto que aporta un nuevo giro a lo que mejor conoces. Con su diseño atemporal y su comodidad inigualable, es imprescindible en cualquier colección."
+            },
+            {
+                id: 8,
+                name: "Adidas Stan Smith",
+                price: 950.00,
+                category: "Adidas",
+                image: "/api/placeholder/300/300",
+                description: "Un ícono del tenis que ha trascendido las canchas para convertirse en un referente del estilo urbano moderno. Su diseño minimalista y limpio lo convierte en un básico versátil para cualquier ocasión."
+            },
+            {
+                id: 9,
+                name: "Adidas NMD_R1",
+                price: 1350.00,
+                category: "Adidas",
+                image: "/api/placeholder/300/300",
+                description: "La fusión perfecta entre la herencia atlética y la innovación moderna, diseñado para el nómada urbano. Con su tecnología Boost y su diseño ligero, ofrece comodidad todo el día y un estilo distintivo."
+            },
+            {
+                id: 10,
+                name: "Puma Suede Classic",
+                price: 850.00,
+                category: "Puma",
+                image: "/api/placeholder/300/300",
+                description: "El Puma Suede ha representado el estilo callejero desde su debut en 1968. Esta versión mantiene su aspecto original con materiales premium y detalles auténticos que rinden homenaje a su rica historia."
+            },
+            {
+                id: 11,
+                name: "Converse One Star",
+                price: 899.00,
+                category: "Converse",
+                image: "/api/placeholder/300/300",
+                description: "Una silueta que debutó en 1974 y se convirtió en un clásico de la cultura skate y la música alternativa. Su estrella característica y perfil bajo le dan un estilo único que destaca en cualquier outfit casual."
+            },
+            {
+                id: 12,
+                name: "Reebok Club C 85 Vintage",
+                price: 950.00,
+                category: "Reebok",
+                image: "/api/placeholder/300/300",
+                description: "Inspirado en el tenis de los años 80, este modelo ofrece un estilo vintage combinado con confort moderno. Su cuero suave y diseño limpio lo convierten en un básico atemporal para el día a día."
+            }
+        ];
+
+        // DOM Elements
+        document.addEventListener('DOMContentLoaded', () => {
+            // Toast notification
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            // Cart elements
+            const cartIcon = document.getElementById('cart-icon');
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const closeCart = document.querySelector('.close-cart');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartSubtotal = document.getElementById('cart-subtotal');
+            const cartTotal = document.getElementById('cart-total');
+            const cartCount = document.querySelector('.cart-count');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            // User profile
+            const userIcon = document.getElementById('user-icon');
+            
+            // Product modal
+            const productModal = document.getElementById('product-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const modalAddToCart = document.getElementById('modal-add-to-cart');
+            
+            // Brands
+            const brands = document.querySelectorAll('.brand');
+            const allProducts = document.getElementById('all-products');
+            const brandProductsSections = document.querySelectorAll('.brand-products');
+            
+            // Product interaction
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const quickViewButtons = document.querySelectorAll('.quick-view');
+            
+            // Newsletter
+            const newsletterForm = document.getElementById('newsletter-form');
+            
+            // Footer links
+            const faqLink = document.getElementById('faq-link');
+            const shippingLink = document.getElementById('shipping-link');
+            const privacyLink = document.getElementById('privacy-link');
+            const termsLink = document.getElementById('terms-link');
+            
+            // Back to top
+            const backToTop = document.getElementById('back-to-top');
+            
+            // Cart array
+            let cart = [];
+            
+            // Toast notification function
+            function showToast(message, type = 'success') {
+                toastMessage.textContent = message;
+                toast.className = 'toast show';
+                if (type === 'success') {
+                    toast.classList.add('success');
+                } else if (type === 'error') {
+                    toast.classList.add('error');
+                }
+                
+                setTimeout(() => {
+                    toast.className = 'toast';
+                }, 3000);
+            }
+            
+            // Cart functionality
+            function openCart(e) {
+                e.preventDefault();
+                cartSidebar.classList.add('open');
+            }
+            
+            function closeCartSidebar() {
+                cartSidebar.classList.remove('open');
+            }
+            
+            // Brand filters
+            function showBrandProducts(brandName) {
+                // Hide all product sections
+                allProducts.style.display = 'none';
+                brandProductsSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show the selected brand's products
+                const brandProductsSection = document.getElementById(`${brandName}-products`);
+                if (brandProductsSection) {
+                    brandProductsSection.classList.add('active');
+                    // Scroll to products section
+                    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    // If no specific brand section found, show all products
+                    allProducts.style.display = 'grid';
+                }
+            }
+            
+            // Show all products function
+            function showAllProducts() {
+                brandProductsSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                allProducts.style.display = 'grid';
+            }
+            
+            // Quick view modal
+            function openQuickView(productId) {
+                const product = products.find(p => p.id === productId);
+                
+                if (product) {
+                    // Update modal content
+                    document.getElementById('modal-product-image').src = product.image;
+                    document.getElementById('modal-product-title').textContent = product.name;
+                    document.getElementById('modal-product-price').textContent = `Q${product.price.toFixed(2)}`;
+                    document.getElementById('modal-product-description').textContent = product.description;
+                    document.getElementById('modal-product-category').innerHTML = `<strong>Categoría:</strong> <span>${product.category}</span>`;
+                    
+                    // Set the product ID to the add to cart button
+                    modalAddToCart.setAttribute('data-product', productId);
+                    
+                    // Reset quantity and size selection
+                    document.querySelector('.quantity').value = 1;
+                    const sizeOptions = document.querySelectorAll('.size-option');
+                    sizeOptions.forEach(option => option.classList.remove('active'));
+                    
+                    // Show modal
+                    productModal.style.display = 'block';
+                    setTimeout(() => {
+                        productModal.classList.add('active');
+                    }, 10);
+                }
+            }
+            
+            function closeProductModal() {
+                productModal.classList.remove('active');
+                setTimeout(() => {
+                    productModal.style.display = 'none';
+                }, 300);
+            }
+            
+            // Add to cart functionality
+            function addToCart(productId, quantity) {
+                const product = products.find(p => p.id === productId);
+                
+                if (product) {
+                    // Check if product already in cart
+                    const existingItem = cart.find(item => item.id === productId);
+                    
+                    // Get selected size
+                    let selectedSize = '7';
+                    const activeSizeElement = document.querySelector('.size-option.active');
+                    if (activeSizeElement) {
+                        selectedSize = activeSizeElement.textContent;
+                    }
+                    
+                    if (existingItem) {
+                        // Check if same size
+                        if (existingItem.size === selectedSize) {
+                            existingItem.quantity += quantity;
+                        } else {
+                            // Add as new item with different size
+                            cart.push({
+                                id: product.id,
+                                name: product.name,
+                                price: product.price,
+                                image: product.image,
+                                quantity: quantity,
+                                size: selectedSize
+                            });
+                        }
+                    } else {
+                        // Add new item to cart
+                        cart.push({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            image: product.image,
+                            quantity: quantity,
+                            size: selectedSize
+                        });
+                    }
+                    
+                    // Update cart UI
+                    updateCartUI();
+                    
+                    // Show notification
+                    showToast(`${product.name} añadido al carrito!`, 'success');
+                }
+            }
+            
+            function updateCartUI() {
+                // Clear cart items container
+                cartItemsContainer.innerHTML = '';
+                
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p>Tu carrito está vacío</p>';
+                    cartSubtotal.textContent = 'Q0.00';
+                    cartTotal.textContent = 'Q0.00';
+                    cartCount.textContent = '0';
+                    return;
+                }
+                
+                // Calculate total
+                let total = 0;
+                
+                // Add items to cart UI
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    const cartItemEl = document.createElement('div');
+                    cartItemEl.className = 'cart-item';
+                    cartItemEl.innerHTML = `
+                        <div class="cart-item-image">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-title">${item.name}</h4>
+                            <div class="cart-item-price">Q${item.price.toFixed(2)}</div>
+                            <div class="cart-item-size">Talla: ${item.size}</div>
+                            <div class="cart-item-quantity">
+                                <button class="decrease-item" data-id="${item.id}" data-size="${item.size}">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="increase-item" data-id="${item.id}" data-size="${item.size}">+</button>
+                            </div>
+                            <button class="remove-item" data-id="${item.id}" data-size="${item.size}">Eliminar</button>
+                        </div>
+                    `;
+                    
+                    cartItemsContainer.appendChild(cartItemEl);
+                });
+                
+                // Update cart totals
+                cartSubtotal.textContent = `Q${total.toFixed(2)}`;
+                cartTotal.textContent = `Q${total.toFixed(2)}`;
+                cartCount.textContent = cart.reduce((acc, item) => acc + item.quantity, 0);
+                
+                // Add event listeners to cart item buttons
+                document.querySelectorAll('.decrease-item').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const id = parseInt(e.target.getAttribute('data-id'));
+                        const size = e.target.getAttribute('data-size');
+                        decreaseCartItemQuantity(id, size);
+                    });
+                });
+                
+                document.querySelectorAll('.increase-item').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const id = parseInt(e.target.getAttribute('data-id'));
+                        const size = e.target.getAttribute('data-size');
+                        increaseCartItemQuantity(id, size);
+                    });
+                });
+                
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const id = parseInt(e.target.getAttribute('data-id'));
+                        const size = e.target.getAttribute('data-size');
+                        removeCartItem(id, size);
+                    });
+                });
+            }
+            
+            function decreaseCartItemQuantity(productId, size) {
+                const item = cart.find(item => item.id === productId && item.size === size);
+                
+                if (item) {
+                    if (item.quantity > 1) {
+                        item.quantity--;
+                        updateCartUI();
+                    } else {
+                        removeCartItem(productId, size);
+                    }
+                }
+            }
+            
+            function increaseCartItemQuantity(productId, size) {
+                const item = cart.find(item => item.id === productId && item.size === size);
+                
+                if (item) {
+                    if (item.quantity < 10) {
+                        item.quantity++;
+                        updateCartUI();
+                    } else {
+                        showToast('Máximo 10 unidades por producto', 'error');
+                    }
+                }
+            }
+            
+            function removeCartItem(productId, size) {
+                cart = cart.filter(item => !(item.id === productId && item.size === size));
+                updateCartUI();
+                showToast('Producto eliminado del carrito', 'success');
+            }
+            
+            // Back to top functionality
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Event Listeners
+            cartIcon.addEventListener('click', openCart);
+            closeCart.addEventListener('click', closeCartSidebar);
+            closeModal.addEventListener('click', closeProductModal);
+            
+            userIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Funcionalidad de usuario próximamente', 'info');
+            });
+            
+            // Brand click events
+            brands.forEach(brand => {
+                brand.addEventListener('click', () => {
+                    const brandName = brand.getAttribute('data-brand');
+                    showBrandProducts(brandName);
+                });
+            });
+            
+            // Reset brand filter when clicking on Products section in nav
+            document.querySelector('nav ul li a[href="#products"]').addEventListener('click', showAllProducts);
+            
+            // Add to cart events - reattach event listeners to all buttons
+            function attachAddToCartEvents() {
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = parseInt(e.target.getAttribute('data-product'));
+                        addToCart(productId, 1);
+                    });
+                });
+            }
+            
+            // Quick view events - reattach event listeners to all buttons
+            function attachQuickViewEvents() {
+                document.querySelectorAll('.quick-view').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = parseInt(e.target.getAttribute('data-product'));
+                        openQuickView(productId);
+                    });
+                });
+            }
+            
+            // Attach initial events
+            attachAddToCartEvents();
+            attachQuickViewEvents();
+            
+            // Modal add to cart
+            modalAddToCart.addEventListener('click', () => {
+                const productId = parseInt(modalAddToCart.getAttribute('data-product'));
+                const quantity = parseInt(document.querySelector('.quantity').value);
+                addToCart(productId, quantity);
+                closeProductModal();
+            });
+            
+            // Size selection
+            const sizeOptions = document.querySelectorAll('.size-option');
+            sizeOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove active class from all options
+                    sizeOptions.forEach(opt => opt.classList.remove('active'));
+                    // Add active class to selected option
+                    option.classList.add('active');
+                });
+            });
+            
+            // Quantity input
+            const decreaseBtn = document.querySelector('.decrease');
+            const increaseBtn = document.querySelector('.increase');
+            const quantityInput = document.querySelector('.quantity');
+            
+            decreaseBtn.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                }
+            });
+            
+            increaseBtn.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (value < 10) {
+                    quantityInput.value = value + 1;
+                }
+            });
+            
+            // Prevent form submission on quantity input
+            quantityInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                }
+            });
+            
+            // Footer links
+            faqLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Sección de Preguntas Frecuentes próximamente', 'info');
+            });
+            
+            shippingLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Información de Envíos y Devoluciones próximamente', 'info');
+            });
+            
+            privacyLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Política de Privacidad próximamente', 'info');
+            });
+            
+            termsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Términos y Condiciones próximamente', 'info');
+            });
+            
+            // Checkout button
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    showToast('Tu carrito está vacío', 'error');
+                } else {
+                    showToast('Procesando tu pedido...', 'success');
+                    // Simulate checkout process
+                    setTimeout(() => {
+                        cart = [];
+                        updateCartUI();
+                        closeCartSidebar();
+                        showToast('¡Pedido realizado con éxito!', 'success');
+                    }, 2000);
+                }
+            });
+            
+            // Newsletter form submission
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = newsletterForm.querySelector('input[type="email"]').value;
+                showToast(`¡Gracias por suscribirte con ${email}!`, 'success');
+                newsletterForm.reset();
+            });
+            
+            // Close modal when clicking outside of it
+            window.addEventListener('click', (e) => {
+                if (e.target === productModal) {
+                    closeProductModal();
+                }
+            });
+            
+            // Smooth scroll for all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+        
+    </script>
+    
+</body>
+</html>
